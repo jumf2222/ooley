@@ -24,6 +24,8 @@ const enum MODE {
     CLIENT
 }
 
+const SERVER_IP = "129.213.120.18:80";
+
 export interface User {
     objects: Object[],
     rpcLogInd: number;
@@ -72,13 +74,6 @@ export class NetworkManager {
         return this._instance;
     }
 
-    constructor() {
-        // this.users[this.userId] = [];
-        // this.sendRPC(0, 0, this.userId);
-        // if (this.onConnected !== null) {
-        //     this.onConnected();
-    }
-
     async startHost(): Promise<string> {
         this.mode = MODE.SERVER;
         try {
@@ -92,8 +87,7 @@ export class NetworkManager {
     private async setupSignalingServer(): Promise<string> {
         return new Promise((resolve, reject) => {
             this.userId = 0;
-            // let signalCon = new WebSocket(`ws://${window.location.hostname}:25566/ws/echo`);
-            let signalCon = new WebSocket(`ws://129.213.120.18:80/ws/echo`);
+            let signalCon = new WebSocket(`ws://${SERVER_IP}/ws/echo`);
             this.signalingConnection = signalCon;
 
             signalCon.onmessage = async (event) => {
@@ -148,8 +142,6 @@ export class NetworkManager {
                             if (!user.udpCon) { console.error('Signalling error: No udp con'); return; };
                             let readyHandler = (event: Event) => {
                                 if (user.tcpCon?.readyState === 'open' && user.udpCon?.readyState === 'open') { // User Connected
-                                    // this.onUserConnected(userId);
-                                    // this.sendRPCAll(this.encodeRPC(userId, 0, 0, [])); // Send on user connected
                                     this.invalid = true;
                                 }
                             };

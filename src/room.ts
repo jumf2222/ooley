@@ -272,7 +272,6 @@ export class DrawingManager {
     };
 }
 
-// let roomIdDiv = document.getElementById("roomId") as HTMLElement;
 let statusDiv = document.getElementById("status") as HTMLElement;
 let preloader = document.getElementById("preloader") as HTMLElement;
 let controls = document.getElementById("controls") as HTMLElement;
@@ -280,7 +279,6 @@ let hostIFrame: HTMLIFrameElement | null = null;
 
 // @ts-ignore
 window.startHost = function (isNew: boolean) {
-    // console.log(man);
     if (isNew) {
         if (!hostIFrame) {
             hostIFrame = document.createElement("iframe");
@@ -288,7 +286,6 @@ window.startHost = function (isNew: boolean) {
             hostIFrame.style.display = "none";
             document.body.append(hostIFrame);
             hostIFrame.onload = () => {
-                // console.log(frame.contentDocument, frame.contentWindow);
                 // @ts-ignore
                 hostIFrame.contentWindow?.startHost();
             }
@@ -300,7 +297,6 @@ window.startHost = function (isNew: boolean) {
             console.log("STARTED AS HOST WITH ROOM ID", roomId);
             // @ts-ignore
             window.parent.startedHost(roomId);
-            // roomIdDiv.textContent = roomId;
         });
     }
 }

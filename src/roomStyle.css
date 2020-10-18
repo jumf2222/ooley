@@ -1,9 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    /* border: none; */
-    /* outline: none; */
-    /* box-sizing: border-box; */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -24,9 +21,6 @@ body {
 }
 
 body {
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
     background: #ffffff;
     cursor: crosshair;
 }
@@ -58,16 +52,7 @@ body {
     margin-left: 0;
 }
 
-/* Safari @-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-} */
-
-@keyframes spin {
+@keyframes bounce {
     0% {
         transform: translateY(-120px);
     }
@@ -84,15 +69,13 @@ body {
 .first-o {
     color: #111111;
     transform: translateY(-120px);
-    /* -webkit-animation: spin 2s linear infinite; */
-    animation: spin 0.5s 0.15s cubic-bezier(0.5, 0.05, 1, 0.5) infinite
+    animation: bounce 0.5s 0.15s cubic-bezier(0.5, 0.05, 1, 0.5) infinite
         alternate;
 }
 
 .second-o {
     color: #111111;
-    /* -webkit-animation: spin 2s linear infinite; */
-    animation: spin 0.5s cubic-bezier(0.5, 0.05, 1, 0.5) infinite alternate;
+    animation: bounce 0.5s cubic-bezier(0.5, 0.05, 1, 0.5) infinite alternate;
 }
 
 #preloader.hidden,
@@ -108,7 +91,6 @@ body {
 }
 
 canvas {
-    /* border: 5px solid rgba(0, 0, 0, 0.4); */
     opacity: 0;
     visibility: hidden;
     width: 100vw;
