@@ -1,5 +1,11 @@
 const WebSocket = require("ws");
-const wss = new WebSocket.Server({ port: 80 });
+const https = require("https");
+const fs = require("fs");
+const server = https.createServer({
+    cert: fs.readFileSync("/etc/letsencrypt/live/wss.ooley.me/fullchain.pem"),
+    key: fs.readFileSync("/etc/letsencrypt/live/wss.ooley.me/privkey.pem"),
+});
+const wss = new WebSocket.Server({ port: 80, server });
 
 let rooms = {};
 
