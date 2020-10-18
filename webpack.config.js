@@ -1,13 +1,9 @@
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
     entry: { index: "./src/index.ts", room: "./src/room.ts" },
     plugins: [
-        new CleanWebpackPlugin({
-            cleanStaleWebpackAssets: false,
-        }),
         new HtmlWebpackPlugin({
             filename: "index.html",
             chunks: ["index"],
