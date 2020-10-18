@@ -21,7 +21,7 @@ module.exports = {
     ],
     devtool: "source-map",
     devServer: {
-        contentBase: "./public",
+        contentBase: "./docs",
         // hot: true,
         compress: true,
         port: 25565,
@@ -29,7 +29,7 @@ module.exports = {
     },
     output: {
         filename: "[name].bundle.js",
-        path: path.resolve(__dirname, "public"),
+        path: path.resolve(__dirname, "docs"),
         devtoolModuleFilenameTemplate: "[absolute-resource-path]",
         chunkFilename: "[id].bundle_[chunkhash].js",
     },
