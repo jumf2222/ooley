@@ -310,7 +310,7 @@ window.startClient = function (roomId) {
         // roomIdInput.value = roomId;
         statusDiv.textContent = roomId;
         statusDiv.onclick = () => {
-            navigator.clipboard.writeText(`http://${window.location.hostname}:25565/?roomId=${roomId}`).then(function () {
+            navigator.clipboard.writeText(`http://${window.location.hostname}/room?roomId=${roomId}`).then(function () {
                 console.log('Async: Copying to clipboard was successful!');
             }, function (err) {
                 console.error('Async: Could not copy text: ', err);
