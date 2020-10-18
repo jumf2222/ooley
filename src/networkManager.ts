@@ -87,7 +87,7 @@ export class NetworkManager {
     private async setupSignalingServer(): Promise<string> {
         return new Promise((resolve, reject) => {
             this.userId = 0;
-            let signalCon = new WebSocket(`wss://${SERVER_IP}`);
+            let signalCon = new WebSocket(`wss://${SERVER_IP}:80`);
             this.signalingConnection = signalCon;
 
             signalCon.onmessage = async (event) => {
