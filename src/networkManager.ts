@@ -24,7 +24,7 @@ const enum MODE {
     CLIENT
 }
 
-const SERVER_IP = "129.213.120.18:80";
+const SERVER_IP = "wss.ooley.me";
 
 export interface User {
     objects: Object[],
