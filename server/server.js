@@ -5,7 +5,7 @@ const server = https.createServer({
     cert: fs.readFileSync("/etc/letsencrypt/live/wss.ooley.me/fullchain.pem"),
     key: fs.readFileSync("/etc/letsencrypt/live/wss.ooley.me/privkey.pem"),
 });
-const wss = new WebSocket.Server({ port: 80, server });
+const wss = new WebSocket.Server({ server });
 
 let rooms = {};
 
@@ -18,7 +18,7 @@ wss.on("connection", (ws) => {
     ws.on("message", (message) => {
         // @ts-ignore
         let msg = JSON.parse(message);
-        console.log("Decoded:", msg);
+        // console.log("Decoded:", msg);
         if (msg.startHost) {
             let uuid = createUuid();
             while (rooms[uuid]) {
@@ -64,3 +64,5 @@ wss.on("connection", (ws) => {
         }
     });
 });
+
+server.listen(80);
