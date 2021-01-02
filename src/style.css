@@ -1,8 +1,10 @@
 #ooley {
-    margin: 0;
-    color: #111111;
-    font-family: "Krona One", sans-serif;
-    font-size: 4rem;
+    display: block;
+    padding-right: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 200px;
     text-align: center;
     cursor: default;
     user-select: none;
@@ -13,18 +15,20 @@
     flex-direction: column;
     width: 50%;
     margin: 0 auto;
-    width: 200px;
+    width: 250px;
 }
 
 input {
     background-color: #f1f3f4;
     color: #111111;
-    height: 47px;
+    height: 48px;
     font-size: 18px;
     border-radius: 5px;
+    padding: 0 18px;
     text-align: center;
     border: 1px solid #f1f3f4;
     transition: box-shadow 0.1s;
+    border: 1px solid  #b1b4b8;
 }
 
 button:focus,
@@ -36,11 +40,7 @@ select:focus {
     border-radius: 5px;
 }
 
-input:hover {
-    border: 1px solid #6f7070;
-}
-
-input:focus {
+input:hover, input:focus {
     border: 1px solid #111111;
 }
 
@@ -50,12 +50,42 @@ input:focus {
 
 h2 {
     margin: 16px 0;
-    padding-top: 20px;
+    padding-top: 16px;
     color: #111111;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 20px;
     text-align: center;
 }
+
+
+h3 {
+    color: #7f8286;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  h3:before,
+  h3:after {
+    background-color:  #7f8286;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+  
+  h3:before {
+    right: 0.5em;
+    margin-left: -50%;
+  }
+  
+  h3:after {
+    left: 0.5em;
+    margin-right: -50%;
+  }
 
 p {
     font-family: Helvetica, Arial, sans-serif;
@@ -73,7 +103,7 @@ button {
     font-size: 18px;
 
     width: 100%;
-    margin: 20px 0 0 0;
+    margin: 16px 0;
     padding: 14px;
 
     border: 1px solid #1a73e8;
