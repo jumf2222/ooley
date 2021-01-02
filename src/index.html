@@ -11,12 +11,10 @@
         />
         <meta name="description" content="Ooley - Draw With Friends" />
         <title>Ooley</title>
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap"
-            rel="stylesheet"
-        />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script
             async
@@ -34,9 +32,10 @@
     </head>
 
     <body>
-        <h1 id="ooley">Ooley</h1>
+        <!-- <h1 id="ooley">Ooley</h1> -->
+        <img id="ooley" src="logo.svg" alt="Ooley Logo">
         <div class="container">
-            <h2>Enter Room Code</h2>
+            <h2>Enter Room Code:</h2>
             <input
                 id="room-code"
                 type="text"
@@ -47,15 +46,16 @@
             <button
                 onclick="window.location.href=`http:\/\/${window.location.hostname}/room?roomId=${document.getElementById('room-code').value}`"
             >
-                Enter
+                Enter Room
             </button>
+            <h3>or</h3>
             <button
                 id="new-room"
                 onclick="window.location.href=`http:\/\/${window.location.hostname}/room?isHost=true`"
             >
-                New Room
+                Create Room
             </button>
         </div>
-        <p class="foot-text">Made by Julian de Rushe & Brian Latchman, 2020</p>
+        <p class="foot-text">Made by Brian Latchman & Julian de Rushe, 2020</p>
     </body>
 </html>

@@ -27,8 +27,6 @@ body {
 
 #preloader {
     display: flex;
-    font-family: "Krona One", sans-serif;
-    font-size: 8rem;
     position: absolute;
     z-index: 2;
     top: 50%;
@@ -67,14 +65,15 @@ body {
 }
 
 .first-o {
-    color: #111111;
+    width: 123px;
     transform: translateY(-120px);
     animation: bounce 0.5s 0.15s cubic-bezier(0.5, 0.05, 1, 0.5) infinite
         alternate;
 }
 
 .second-o {
-    color: #111111;
+    margin-left: 8px;
+    width: 90px;
     animation: bounce 0.5s cubic-bezier(0.5, 0.05, 1, 0.5) infinite alternate;
 }
 
