@@ -90,15 +90,13 @@ body {
 }
 
 canvas {
-    opacity: 0;
-    visibility: hidden;
+    display: block;
     width: 100vw;
     height: 100vh;
-    cursor: crosshair;
-    transition: border-color 0.2s;
-    touch-action: none;
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
+    cursor: crosshair;
+    touch-action: none;
     transition: opacity 1s, visibility 1s step-start;
 }
 

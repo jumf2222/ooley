@@ -1,15 +1,11 @@
-type Type = Number | String | Boolean | Object | UInt8
+type Type = Number | String | Boolean | Object | UInt8;
 
 export class UInt8 { }
-
-export interface Dictionary<T> {
-    [Key: string]: T;
-}
 
 const ICE_SERVERS: RTCIceServer[] = [
     { urls: 'stun:stun.l.google.com:19302' },
     {
-        urls: "turn:129.213.138.47",
+        urls: "turn:129.213.55.117",
         username: "webrtc",
         credential: "696969"
     }
@@ -31,7 +27,7 @@ export interface User {
     rpcLogInd: number;
     tcpCon: RTCDataChannel | null,
     udpCon: RTCDataChannel | null,
-    syncing: boolean
+    syncing: boolean;
     _peerCon: RTCPeerConnection | null,
     _uuid: string;
 }
@@ -77,9 +73,9 @@ export class NetworkManager {
     async startHost(): Promise<string> {
         this.mode = MODE.SERVER;
         try {
-            setTimeout(() => { this.sendLoop() }, 0);
+            setTimeout(() => { this.sendLoop(); }, 0);
             return this.setupSignalingServer();
-        } catch (error) {
+        } catch (error: any) {
             throw new Error(error);
         }
     }
@@ -180,7 +176,7 @@ export class NetworkManager {
                     this.connectingPromise = null;
                     console.error("Failed to connect");
                 }
-            }
+            };
 
             signalCon.onerror = (error) => {
                 console.error('Websocket error', error);
@@ -194,7 +190,7 @@ export class NetworkManager {
                 if (this.mode === MODE.CLIENT) {
                     resolve("");
                 } else {
-                    this.signalingConnection?.send(JSON.stringify({ startHost: true }))
+                    this.signalingConnection?.send(JSON.stringify({ startHost: true }));
                 }
             };
         });
@@ -260,7 +256,7 @@ export class NetworkManager {
             };
 
             user.tcpCon.onmessage = (evt) => { this._decodeRPC(new DataView(evt.data), 0); };
-            user.tcpCon.onopen = readyHandler
+            user.tcpCon.onopen = readyHandler;
             user.udpCon.onopen = readyHandler;
             await user._peerCon.setLocalDescription(await user._peerCon.createOffer());
             this.signalingConnection?.send(JSON.stringify({ sdpOffer: user._peerCon.localDescription, uuid: uuid, roomId: roomId }));
@@ -343,7 +339,7 @@ export class NetworkManager {
                 }
             }
         }
-        setTimeout(() => { this.sendLoop() }, 0);
+        setTimeout(() => { this.sendLoop(); }, 0);
     }
 
     encodeRPC(ownerId: number, objId: number, rpcId: number, args: any) {
@@ -515,17 +511,17 @@ export class NetworkManager {
 }
 
 export function Replicated(...types: Type[]) {
-    return function <T extends { new(...args: any[]): {} }>(constr: T) {
+    return function <T extends { new(...args: any[]): {}; }>(constr: T) {
         let orig = constr;
         let manager = NetworkManager.instance;
         let id = manager.registerNetworkedObject(constr, types);
         let newConst = function (...args: any[]) {
             return manager.spawn(id, args);
-        }
+        };
 
         newConst.prototype = orig.prototype;
         return newConst as any as T;
-    }
+    };
 }
 
 export function Watched(arg: Type) {
@@ -537,8 +533,8 @@ export function Watched(arg: Type) {
             set: function (test) {
                 this["_" + propertyKey] = test;
             }
-        })
-    }
+        });
+    };
 }
 
 // export function RPC(...types: Type[]) {
@@ -562,8 +558,8 @@ export function ClientRPC(...types: Type[]) {
         descriptor.value = function (...args: any[]) {
             if (manager.mode === MODE.CLIENT) { return; }
             manager.sendRPCAll(manager.encodeRPC((this as any)._ownerId, (this as any)._objId, id, args));
-        }
-    }
+        };
+    };
 }
 
 export function ServerRPC(...types: Type[]) {
@@ -575,8 +571,8 @@ export function ServerRPC(...types: Type[]) {
         descriptor.value = function (...args: any[]) {
             if (manager.mode === MODE.SERVER) { return; }
             manager.sendRPC(0, manager.encodeRPC(manager.userId, (this as any)._objId, id, args));
-        }
-    }
+        };
+    };
 }
 
 export function IRPC(...types: Type[]) {
@@ -594,15 +590,15 @@ export function IRPC(...types: Type[]) {
             if (manager.mode === MODE.SERVER) { return; }
             orig.call(this, ...args);
             manager.sendRPC(0, manager.encodeRPC(manager.userId, (this as any)._objId, serverId, args));
-        }
+        };
 
         let serverFn = function (...args: any[]) {
             if (manager.mode === MODE.CLIENT) { return; }
             //@ts-ignore
             manager.sendRPCAll(manager.encodeRPC(this._ownerId, this._objId, clientId, args));
-        }
+        };
         let serverId = manager.registerRPC(serverFn, types);
-    }
+    };
 }
 
 export function RPC(...types: Type[]) {
@@ -615,13 +611,13 @@ export function RPC(...types: Type[]) {
         descriptor.value = function (...args: any[]) {
             if (manager.mode === MODE.SERVER) { return; }
             manager.sendRPC(0, manager.encodeRPC(manager.userId, (this as any)._objId, serverId, args));
-        }
+        };
 
         let serverFn = function (...args: any[]) {
             if (manager.mode === MODE.CLIENT) { return; }
             //@ts-ignore
             manager.sendRPCAll(manager.encodeRPC(this._ownerId, this._objId, clientId, args));
-        }
+        };
         let serverId = manager.registerRPC(serverFn, types);
-    }
+    };
 }
